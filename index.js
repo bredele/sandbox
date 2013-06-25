@@ -3,7 +3,14 @@
  * Module dependencies.
  */
 
-var index = require('emitter');
+var Emitter = require('emitter')
+  , toArray = require('toarray')
+  , Debug = require('debug');
+
+/**
+ * Sandbox global event emitter.
+ */
+var emitter = new Emitter(); //should we inverse its control? contructor?
 
 /**
  * Expose `Sandbox`.
@@ -19,16 +26,60 @@ module.exports = Sandbox;
 
 function Sandbox(namespace) {
   this.namespace = namespace;
+  this.debug = Debug(namespace);
 }
 
-Sandbox.prototype.emit = function() {
-  
+
+/**
+ * Emit `event` with the given args.
+ *
+ * @param {String} event
+ * @param {Mixed} ...
+ * @return {Emitter}
+ */
+
+Sandbox.prototype.emit = function(event) {
+  emitter.emit.apply(emitter, [this.namespace + ":" + event].concat(toArray(arguments, 1)));
 };
+
+
+/**
+ * Listen on the given `event` with `fn`.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
 
 Sandbox.prototype.on = function() {
-  // body...
+  emitter.on.apply(emitter, arguments);
 };
 
+
+/**
+ * Adds an `event` listener that will be invoked a single
+ * time then automatically removed.
+ *
+ * @param {String} event
+ * @param {Function} fn
+ * @return {Emitter}
+ * @api public
+ */
+
 Sandbox.prototype.once = function() {
-  // body...
+  emitter.once.apply(emitter, arguments); 
+};
+
+
+/**
+ * Create a debugger with the constructor namespace.
+ *
+ * @param {String} message (console log like)
+ * @return {Type}
+ * @api public
+ */
+
+Sandbox.prototype.log = function() {
+  this.debug.apply(null, arguments);
 };

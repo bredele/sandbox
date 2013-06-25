@@ -5,7 +5,11 @@
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
-    "component/emitter": "*"
+    "component/emitter": "*",
+    "component/debug": "*",
+    "visionmedia/debug": "*",
+    "bredele/toArray": "*",
+    "bredele/toarray": "*"
   },
   "development": {},
   "license": "MIT",
