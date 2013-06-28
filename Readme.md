@@ -1,4 +1,3 @@
-
 # sandbox
 
   Emitter sandbox
@@ -35,5 +34,7 @@
   MIT
 
 ## TODO
-  - Test
-  - Emitter control inversion
+
+- [ ] unit test
+- [ ] Emitter control inversion
+- [ ] Remove listeners
