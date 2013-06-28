@@ -6,7 +6,6 @@
   "keywords": [],
   "dependencies": {
     "component/emitter": "*",
-    "component/debug": "*",
     "visionmedia/debug": "*",
     "bredele/toArray": "*",
     "bredele/toarray": "*"
